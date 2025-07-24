@@ -65,7 +65,7 @@ Generate appropriate documentation based on the code type:
 **Status Codes**
 - `200` - Success
 - `400` - Bad Request
-- `401` - Unauthorized
+- `401` - Unauthorised
 
 **Error Response**
 ```json

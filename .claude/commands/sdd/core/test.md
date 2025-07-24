@@ -31,7 +31,7 @@ Generate appropriate tests based on the context:
 ### 2. Test Scenario Planning
 
 #### Unit Tests
-- **Happy Path**: Normal expected behavior
+- **Happy Path**: Normal expected behaviour
 - **Edge Cases**: Boundary conditions, empty inputs, limits
 - **Error Cases**: Invalid inputs, exceptions, failures
 - **State Changes**: Before/after conditions
@@ -53,7 +53,7 @@ describe('[Component/Function Name]', () => {
   });
 
   describe('[Feature/Method]', () => {
-    it('should [expected behavior] when [condition]', () => {
+    it('should [expected behaviour] when [condition]', () => {
       // Arrange
       [setup test data]
       
@@ -175,7 +175,7 @@ describe('[Component/Function Name]', () => {
 ## Best Practices Applied
 - **Descriptive Names**: Tests clearly describe what they verify
 - **Independence**: Each test runs independently
-- **Fast Execution**: Tests are optimized for speed
+- **Fast Execution**: Tests are optimised for speed
 - **Maintainable**: Easy to understand and modify
 - **Comprehensive**: Cover success, failure, and edge cases
 
@@ -184,6 +184,6 @@ describe('[Component/Function Name]', () => {
 - All critical paths are covered
 - Tests are independent and repeatable
 - Mock strategy is clear
-- Tests actually verify behavior
+- Tests actually verify behaviour
 
 Generate comprehensive tests for the specified code target.

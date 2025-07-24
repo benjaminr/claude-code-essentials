@@ -67,13 +67,13 @@ For each task in the implementation plan:
 
 ### Security
 - Validate all inputs
-- Use proper authentication/authorization
+- Use proper authentication/authorisation
 - Avoid hardcoding secrets or sensitive data
 - Follow secure coding practices
 
 ### Performance
 - Consider performance implications of implementation choices
-- Optimize database queries
+- Optimise database queries
 - Implement caching where appropriate
 - Monitor resource usage
 

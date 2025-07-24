@@ -1,38 +1,62 @@
 ---
-description: Analyze errors, stack traces, and debug code issues
-argument-hint: [error message or description]
+description: Analyse errors, stack traces, and debug code issues (supports images and extended thinking)
+argument-hint: [error message, file path, or image path]
 allowed-tools: Read, Grep, Glob, Task, Bash, WebSearch
 ---
 
 # Debug Code Issues
 
-You are helping debug code issues by analyzing errors, understanding stack traces, and providing targeted solutions.
+You are helping debug code issues by analysing errors, understanding stack traces, and providing targeted solutions.
 
 ## Input
-**Error or Issue Description**: $ARGUMENTS
+**Debug Request**: $ARGUMENTS
+- **Text Error**: Error message or description
+- **Image Path**: Screenshot of error (`.png`, `.jpg`, etc.)
+- **File Path**: Specific file to debug
+- **Complex Issue**: Use "think:" prefix for extended analysis
 
 ## Your Task
 
 Based on the input, perform intelligent debugging:
 
-1. **Error Analysis** - If an error message is provided
-2. **Code Investigation** - Search for related code and context
-3. **Root Cause Analysis** - Identify the underlying issue
-4. **Solution Proposal** - Provide specific fixes and preventive measures
+1. **Input Detection** - Determine if input is text, image, or complex issue
+2. **Error Analysis** - Extract and analyse error information
+3. **Code Investigation** - Search for related code and trace execution paths
+4. **Root Cause Analysis** - Identify the underlying issue
+5. **Solution Proposal** - Provide specific fixes and preventive measures
+
+### Special Handling
+
+#### Image Analysis
+If input is an image path:
+- Use Read tool to view the image
+- Extract error messages, stack traces, or UI issues
+- Identify file paths and line numbers from screenshots
+- Continue with standard debugging process
+
+#### Extended Thinking Mode
+If input starts with "think:":
+- Engage in deeper analysis for complex problems
+- Consider multiple hypotheses
+- Trace through complex execution paths
+- Provide comprehensive solution strategies
 
 ## Debugging Framework
 
 ### 1. Error Analysis Phase
 - **Error Type**: Identify error category (syntax, runtime, logic, etc.)
-- **Stack Trace**: Extract file paths and line numbers
+- **Stack Trace**: Extract file paths and line numbers (from text or images)
 - **Error Message**: Understand what went wrong
 - **Context**: Determine when/where error occurs
+- **Execution Path**: Trace the code flow leading to the error
 
 ### 2. Code Investigation Phase
 - **Read Error Location**: Examine code at error location
-- **Trace Execution Path**: Follow code flow leading to error
+- **Trace Execution Path**: Follow complete code flow from entry point to error
 - **Check Dependencies**: Verify imports and dependencies
 - **Review Recent Changes**: Look for recent modifications if relevant
+- **Cross-File Analysis**: Trace errors across multiple files and modules
+- **Data Flow**: Track how data transforms through the error path
 
 ### 3. Pattern Recognition Phase
 - **Null/Undefined**: Check for missing null checks
@@ -111,12 +135,12 @@ Based on the input, perform intelligent debugging:
 ### Memory/Performance Issues
 - Profile code execution
 - Identify memory leaks
-- Suggest optimization strategies
+- Suggest optimisation strategies
 
 ### Async/Concurrency Bugs
 - Trace promise chains
 - Identify race conditions
-- Suggest proper synchronization
+- Suggest proper synchronisation
 
 ### Integration Errors
 - Check API contracts
@@ -124,11 +148,31 @@ Based on the input, perform intelligent debugging:
 - Test edge cases
 
 ### Build/Compilation Errors
-- Analyze build configuration
+- Analyse build configuration
 - Check dependencies versions
 - Resolve conflicts
 
 ## Advanced Features
+
+### Image Debugging
+When debugging from screenshots:
+- Extract text from error dialogs
+- Identify UI component issues
+- Parse console output from images
+- Analyse browser DevTools screenshots
+
+### Extended Thinking Mode
+For complex debugging scenarios:
+- Multi-hypothesis testing
+- Deep architectural analysis
+- Performance profiling insights
+- Concurrency and race condition detection
+
+### Execution Path Tracing
+- Complete call stack visualisation
+- Cross-file execution flow
+- Async operation tracking
+- Event chain analysis
 
 ### Web Search Integration
 If the error seems framework/library specific:
@@ -148,4 +192,4 @@ If the error seems framework/library specific:
 - Prevention strategies are provided
 - Code examples are correct and tested
 
-Analyze the provided error or issue and deliver a comprehensive debugging solution.
+Analyse the provided error or issue and deliver a comprehensive debugging solution.

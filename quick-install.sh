@@ -2,8 +2,41 @@
 
 # Claude Code Essentials Quick Installer
 # Run with: curl -sSL https://raw.githubusercontent.com/benjaminr/claude-code-essentials/main/quick-install.sh | bash
+# Options: --clean (remove existing commands before install)
 
 set -e  # Exit on any error
+
+# Command line options
+CLEAN_INSTALL=false
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --clean)
+            CLEAN_INSTALL=true
+            shift
+            ;;
+        -h|--help)
+            echo "Claude Code Essentials Quick Installer"
+            echo ""
+            echo "Usage: $0 [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  --clean    Remove existing slash commands before installation"
+            echo "  -h, --help Show this help message"
+            echo ""
+            echo "Examples:"
+            echo "  $0              # Standard installation (preserves existing commands)"
+            echo "  $0 --clean     # Clean installation (removes existing commands)"
+            exit 0
+            ;;
+        *)
+            print_error "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
 
 # Colors for output
 RED='\033[0;31m'
@@ -79,12 +112,40 @@ download_file() {
     fi
 }
 
+# Clean existing commands if requested
+clean_existing_commands() {
+    if [ "$CLEAN_INSTALL" = true ]; then
+        print_status "Cleaning existing slash commands..."
+        
+        if [ -d ~/.claude/commands ]; then
+            # Backup existing commands first
+            if [ -n "$(ls -A ~/.claude/commands 2>/dev/null)" ]; then
+                local backup_dir="$HOME/.claude/commands.backup.$(date +%Y%m%d_%H%M%S)"
+                print_status "Backing up existing commands to $backup_dir"
+                cp -r ~/.claude/commands "$backup_dir"
+            fi
+            
+            # Remove existing commands
+            rm -rf ~/.claude/commands/*
+            print_success "Existing commands cleaned and backed up"
+        else
+            print_status "No existing commands to clean"
+        fi
+    fi
+}
+
 # Create directory structure
 setup_directories() {
     print_status "Setting up global Claude directory structure..."
     
     # Create ~/.claude if it doesn't exist
-    mkdir -p ~/.claude/commands
+    mkdir -p ~/.claude/commands/sdd/core
+    mkdir -p ~/.claude/commands/sdd/orchestration
+    mkdir -p ~/.claude/commands/code/understand
+    mkdir -p ~/.claude/commands/code/improve
+    mkdir -p ~/.claude/commands/project
+    mkdir -p ~/.claude/commands/test
+    mkdir -p ~/.claude/commands/tools
     mkdir -p ~/.claude/templates
     
     print_success "Directory structure created"
@@ -97,21 +158,35 @@ install_commands() {
     local base_url="https://raw.githubusercontent.com/benjaminr/claude-code-essentials/main/.claude/commands"
     local temp_dir=$(mktemp -d)
     
-    # List of all command files
+    # List of all command files with their subdirectories
     local commands=(
-        "api.md" "build.md" "clean.md" "debug.md" "dependencies.md"
-        "design.md" "document.md" "explain.md" "init-sdd.md" "migrate.md"
-        "next.md" "optimize.md" "parallel.md" "plan.md" "prototype.md"
-        "refactor.md" "refine.md" "reset.md" "review.md" "security.md"
-        "setup.md" "spec.md" "spec-all.md" "status.md" "test.md" "todo.md"
-        "validate.md"
+        "sdd/core/build.md" "sdd/core/design.md" "sdd/core/next.md"
+        "sdd/core/plan.md" "sdd/core/refine.md" "sdd/core/reset.md"
+        "sdd/core/review.md" "sdd/core/spec.md" "sdd/core/spec-all.md"
+        "sdd/core/status.md" "sdd/core/validate.md"
+        "sdd/orchestration/parallel.md" "sdd/orchestration/prototype.md"
+        "code/understand/explain.md" "code/understand/trace.md"
+        "code/improve/debug.md" "code/improve/refactor.md"
+        "project/clean.md" "project/dependencies.md" "project/document.md"
+        "project/init-sdd.md" "project/migrate.md" "project/optimize.md"
+        "project/security.md" "project/setup.md" "project/todo.md"
+        "test/coverage.md" "test/test.md"
+        "tools/api.md"
     )
     
     local downloaded=0
     
     for cmd in "${commands[@]}"; do
+        local cmd_dir=$(dirname "$cmd")
+        local cmd_file=$(basename "$cmd")
+        
+        # Create subdirectory in temp
+        mkdir -p "$temp_dir/$cmd_dir"
+        
         if download_file "$base_url/$cmd" "$temp_dir/$cmd" 2>/dev/null; then
-            cp "$temp_dir/$cmd" ~/.claude/commands/
+            # Create target directory and copy file
+            mkdir -p "~/.claude/commands/$cmd_dir"
+            cp "$temp_dir/$cmd" "~/.claude/commands/$cmd"
             ((downloaded++))
         else
             print_warning "Failed to download $cmd"
@@ -172,7 +247,7 @@ verify_installation() {
     print_status "Verifying installation..."
     
     # Check if commands were installed
-    if [ -f ~/.claude/commands/spec.md ]; then
+    if [ -f ~/.claude/commands/sdd/core/spec.md ]; then
         print_success "Core commands installed successfully"
     else
         print_error "Installation verification failed"
@@ -189,21 +264,31 @@ show_next_steps() {
     echo ""
     echo "🎉 Installation Complete!"
     echo ""
+    if [ "$CLEAN_INSTALL" = true ]; then
+        echo "✨ Clean installation completed - all old commands replaced"
+        echo ""
+    fi
     echo "Next steps:"
     echo "  1. Navigate to any project directory"
     echo "  2. Run: /init-sdd"
     echo "  3. Start your first spec: /spec feature-name \"Description\""
     echo ""
-    echo "Available commands:"
-    echo "  Core Workflow: /spec, /design, /plan, /build, /validate, /next"
-    echo "  Rapid Development: /prototype [idea] [mvp|full] [tech-stack]"
-    echo "  Parallel Execution: /parallel [command] [feature1,feature2,...]"
-    echo "  Development: /debug, /test, /optimize, /clean, /dependencies"
-    echo "  Management: /status, /refine, /reset, /spec-all"
+    echo "Available commands (organised by category):"
+    echo "  📋 SDD Core: /spec, /design, /plan, /build, /validate, /next"
+    echo "  🔄 SDD Orchestration: /parallel, /prototype"
+    echo "  🔍 Code Understanding: /explain, /trace"
+    echo "  🛠️  Code Improvement: /debug, /refactor"
+    echo "  📦 Project Management: /clean, /dependencies, /document, /setup"
+    echo "  🧪 Testing: /test, /coverage"
+    echo "  ⚡ Tools: /api"
     echo ""
     echo "Documentation: Each command includes built-in help and examples"
     echo "Global config: ~/.claude/CLAUDE.md"
     echo ""
+    if [ "$CLEAN_INSTALL" = true ]; then
+        echo "💾 Previous commands backed up in ~/.claude/commands.backup.*"
+        echo ""
+    fi
     echo "Repository: https://github.com/benjaminr/claude-code-essentials"
     echo ""
 }
@@ -214,6 +299,11 @@ install_local() {
     
     # Copy all commands
     if [ -d ".claude/commands" ]; then
+        # Create subdirectories first
+        mkdir -p ~/.claude/commands/sdd/{core,orchestration}
+        mkdir -p ~/.claude/commands/code/{understand,improve}
+        mkdir -p ~/.claude/commands/{project,test,tools}
+        
         cp -r .claude/commands/* ~/.claude/commands/
         local command_count=$(find .claude/commands -name "*.md" | wc -l | tr -d ' ')
         print_success "Installed $command_count slash commands"
@@ -249,7 +339,13 @@ install_local() {
 main() {
     print_header
     
+    # Show clean install notice
+    if [ "$CLEAN_INSTALL" = true ]; then
+        print_status "Clean installation mode enabled"
+    fi
+    
     check_requirements
+    clean_existing_commands
     setup_directories
     
     # Check if running locally

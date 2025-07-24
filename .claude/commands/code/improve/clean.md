@@ -18,7 +18,7 @@ Clean and improve code quality:
 1. **Remove Unused Code** - Imports, variables, functions
 2. **Fix Formatting** - Consistent style and structure
 3. **Improve Readability** - Simplify complex expressions
-4. **Update Patterns** - Modernize outdated patterns
+4. **Update Patterns** - Modernise outdated patterns
 
 ## Cleaning Strategy
 
@@ -35,7 +35,7 @@ Clean and improve code quality:
 # 🧹 Code Cleanup Report
 
 ## Summary
-**Files Analyzed**: [X]
+**Files Analysed**: [X]
 **Issues Found**: [Y]
 **Issues Fixed**: [Z]
 
@@ -142,7 +142,7 @@ Clean and improve code quality:
 
 ### Import Hygiene
 - Remove unused imports
-- Organize import order
+- Organise import order
 - Combine duplicate imports
 - Convert require to import
 
@@ -167,7 +167,7 @@ Clean and improve code quality:
 ### Performance Cleanup
 - Remove unnecessary loops
 - Eliminate redundant operations
-- Optimize data structures
+- Optimise data structures
 - Remove memory leaks
 
 ## Safety Measures

@@ -60,7 +60,7 @@ You are improving the current stage of a spec-driven development workflow based 
 - Enhance test coverage
 - Update documentation
 - Refactor for better maintainability
-- Add performance optimizations
+- Add performance optimisations
 
 ## Refinement Guidelines
 
@@ -73,7 +73,7 @@ You are improving the current stage of a spec-driven development workflow based 
 
 ### Quality Improvements
 - Fix formatting and structure issues
-- Improve readability and organization
+- Improve readability and organisation
 - Add missing details or context
 - Enhance technical accuracy
 - Improve actionability of tasks

@@ -71,13 +71,13 @@ graph TD
 [Database schema, relationships, indexes]
 
 ## Security Considerations
-[Authentication, authorization, data protection measures]
+[Authentication, authorisation, data protection measures]
 
 ## Error Handling Strategy
 [How errors are caught, logged, and communicated]
 
 ## Performance Considerations
-[Caching, optimization, scalability concerns]
+[Caching, optimisation, scalability concerns]
 
 ## Integration Points
 [External systems, APIs, third-party services]

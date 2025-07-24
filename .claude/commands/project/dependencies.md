@@ -1,11 +1,11 @@
 ---
-description: Analyze and manage project dependencies
+description: Analyse and manage project dependencies
 allowed-tools: Read, Write, Bash, Glob, WebSearch
 ---
 
-# Analyze Dependencies
+# Analyse Dependencies
 
-You are analyzing project dependencies to identify outdated packages, security vulnerabilities, unused dependencies, and optimization opportunities.
+You are analysing project dependencies to identify outdated packages, security vulnerabilities, unused dependencies, and optimisation opportunities.
 
 ## Your Task
 
@@ -13,8 +13,8 @@ Perform comprehensive dependency analysis:
 
 1. **Inventory Dependencies** - List all project dependencies
 2. **Check for Issues** - Outdated, vulnerable, or problematic packages
-3. **Analyze Usage** - Find unused or duplicate dependencies
-4. **Suggest Improvements** - Recommendations for optimization
+3. **Analyse Usage** - Find unused or duplicate dependencies
+4. **Suggest Improvements** - Recommendations for optimisation
 
 ## Analysis Approach
 
@@ -81,7 +81,7 @@ npm install [package1]@[version] [package2]@[version]
    - Migration effort: [Low/Medium/High]
    - [Link to migration guide]
 
-## 🔍 Optimization Opportunities
+## 🔍 Optimisation Opportunities
 
 ### Unused Dependencies
 Found [X] potentially unused dependencies:
@@ -128,7 +128,7 @@ Breakdown:
 ### Short Term
 1. [ ] Plan major version migrations
 2. [ ] Replace deprecated packages
-3. [ ] Optimize bundle size
+3. [ ] Optimise bundle size
 
 ### Long Term
 1. [ ] Set up automated dependency updates
@@ -211,7 +211,7 @@ updates:
 - All dependencies inventoried
 - Security issues identified
 - Update path is clear
-- Optimization opportunities found
+- Optimisation opportunities found
 - Actionable recommendations provided
 
-Analyze the project's dependencies and provide a comprehensive health report.
+Analyse the project's dependencies and provide a comprehensive health report.

@@ -1,9 +1,9 @@
 ---
-description: Initialize project for spec-driven development workflow
+description: Initialise project for spec-driven development workflow
 allowed-tools: Write, Read, Bash, LS
 ---
 
-# Initialize Spec-Driven Development
+# Initialise Spec-Driven Development
 
 Set up your project to use the spec-driven development workflow with proper memory configuration and templates.
 
@@ -11,7 +11,7 @@ Set up your project to use the spec-driven development workflow with proper memo
 
 1. **Check existing setup**: Look for current CLAUDE.md and .claude directory
 2. **Create directory structure**: Set up necessary directories for specs and templates
-3. **Initialize CLAUDE.md**: Create or enhance project memory with SDD workflow
+3. **Initialise CLAUDE.md**: Create or enhance project memory with SDD workflow
 4. **Set up templates**: Create template files for consistent spec generation
 5. **Provide usage guidance**: Show how to get started with the workflow
 
@@ -43,7 +43,7 @@ If it exists, add SDD workflow section and import the template:
 
 ## Template Files
 
-Create template files that teams can customize:
+Create template files that teams can customise:
 
 ### Requirements Template
 Basic structure with EARS notation examples and common sections.
@@ -63,7 +63,7 @@ Implementation plan structure with phases and task formatting.
 ## Output Format
 
 ```markdown
-# 🚀 Spec-Driven Development Initialized
+# 🚀 Spec-Driven Development Initialised
 
 ## ✅ Setup Complete
 - Created .claude/templates/ with workflow templates
@@ -80,9 +80,9 @@ Implementation plan structure with phases and task formatting.
 ## 📁 Directory Structure
 - `specs/` - All feature specifications
 - `.claude/commands/` - SDD slash commands
-- `.claude/templates/` - Customizable templates
+- `.claude/templates/` - Customisable templates
 
-## 🔧 Customization
+## 🔧 Customisation
 Edit templates in `.claude/templates/` to match your team's standards:
 - Requirements format and sections
 - Design documentation structure  
@@ -91,11 +91,11 @@ Edit templates in `.claude/templates/` to match your team's standards:
 
 ## 💡 Pro Tips
 - Use `/spec-all` for rapid spec generation
-- Customize CLAUDE.md with your tech stack and conventions
+- Customise CLAUDE.md with your tech stack and conventions
 - Create feature-specific CLAUDE.md files in each spec directory
 - Use memory imports to reference common patterns: @api-standards.md
 
 Your project is now ready for systematic, specification-driven development!
 ```
 
-Initialize the project for spec-driven development workflow.
+Initialise the project for spec-driven development workflow.

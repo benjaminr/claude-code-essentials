@@ -17,7 +17,7 @@ Perform comprehensive performance analysis:
 
 1. **Identify Bottlenecks** - Find performance issues
 2. **Analyze Complexity** - Time and space complexity
-3. **Suggest Optimizations** - Specific improvements
+3. **Suggest Optimisations** - Specific improvements
 4. **Provide Benchmarks** - Measure improvements
 
 ## Analysis Approach
@@ -43,7 +43,7 @@ Perform comprehensive performance analysis:
 - Inefficient algorithms
 - Large bundle sizes
 
-### 2. Optimization Report
+### 2. Optimisation Report
 
 ```markdown
 # ⚡ Performance Analysis
@@ -65,14 +65,14 @@ Perform comprehensive performance analysis:
    ```
    - Why it's slow: [Explanation]
 
-### 🟡 Optimization Opportunities
+### 🟡 Optimisation Opportunities
 1. **[Opportunity Name]**
    - Potential improvement: [X]% faster / [Y]% less memory
    - Trade-offs: [Any downsides]
 
-## Recommended Optimizations
+## Recommended Optimisations
 
-### Optimization 1: [Name]
+### Optimisation 1: [Name]
 **Impact**: 🚀 [Expected improvement]
 
 #### Current Code
@@ -80,29 +80,29 @@ Perform comprehensive performance analysis:
 [Current implementation]
 ```
 
-#### Optimized Code
+#### Optimised Code
 ```[language]
-[Optimized implementation]
+[Optimised implementation]
 ```
 
 #### Explanation
 [Why this is faster/more efficient]
 
-### Optimization 2: [Name]
+### Optimisation 2: [Name]
 [Similar structure...]
 
 ## Implementation Priority
 
 1. **Quick Wins** (< 1 hour)
-   - [ ] [Optimization task]
+   - [ ] [Optimisation task]
    - [ ] [Another quick fix]
 
 2. **Medium Effort** (1-4 hours)
-   - [ ] [Medium optimization]
+   - [ ] [Medium optimisation]
    - [ ] [Another medium task]
 
 3. **Major Refactoring** (> 4 hours)
-   - [ ] [Large optimization]
+   - [ ] [Large optimisation]
 
 ## Benchmark Suggestions
 
@@ -115,7 +115,7 @@ Perform comprehensive performance analysis:
 ### Metrics to Track
 - Execution time
 - Memory usage
-- CPU utilization
+- CPU utilisation
 - Response time
 - Throughput
 
@@ -130,43 +130,43 @@ Perform comprehensive performance analysis:
 ### Code Splitting
 [Modules to split]
 
-### Database Optimization
+### Database Optimisation
 [Query improvements, indexing]
 ```
 
-## Optimization Categories
+## Optimisation Categories
 
-### Algorithm Optimization
+### Algorithm Optimisation
 - Better data structures (Array → Set/Map)
 - Improved algorithms (O(n²) → O(n log n))
 - Early termination conditions
 - Memoization/caching
 
 ### Database Performance
-- Query optimization
+- Query optimisation
 - Proper indexing
 - Batch operations
 - Connection pooling
 
-### Frontend Optimization
+### Frontend Optimisation
 - Virtual scrolling
 - Debouncing/throttling
 - React.memo/useMemo
 - Bundle splitting
 
-### Backend Optimization
+### Backend Optimisation
 - Async/parallel processing
 - Stream processing
 - Resource pooling
 - Caching layers
 
-### Memory Optimization
+### Memory Optimisation
 - Object pooling
 - Weak references
 - Garbage collection
 - Memory leak fixes
 
-## Optimization Techniques
+## Optimisation Techniques
 
 ### Immediate Fixes
 - Remove console.logs in production
@@ -178,7 +178,7 @@ Perform comprehensive performance analysis:
 - Implement caching layers
 - Add pagination
 - Use lazy loading
-- Optimize build process
+- Optimise build process
 
 ### Advanced Techniques
 - Web Workers
@@ -188,17 +188,17 @@ Perform comprehensive performance analysis:
 
 ## Trade-off Analysis
 
-For each optimization, consider:
+For each optimisation, consider:
 - **Performance Gain** vs **Code Complexity**
 - **Memory Usage** vs **CPU Usage**
 - **Development Time** vs **Performance Benefit**
-- **Maintainability** vs **Optimization Level**
+- **Maintainability** vs **Optimisation Level**
 
 ## Success Criteria
 - Bottlenecks clearly identified
-- Optimizations are practical
+- Optimisations are practical
 - Trade-offs are explained
 - Benchmarks demonstrate improvement
 - Code remains maintainable
 
-Analyze the specified code and provide actionable performance optimizations.
+Analyse the specified code and provide actionable performance optimisations.

@@ -14,7 +14,7 @@ You are running the complete spec-driven development workflow automatically. You
 
 ## Your Task
 
-Execute all stages of the spec-driven workflow with validation checkpoints between stages. This is "YOLO mode" - optimized for speed while maintaining quality.
+Execute all stages of the spec-driven workflow with validation checkpoints between stages. This is "YOLO mode" - optimised for speed while maintaining quality.
 
 ## Workflow Execution
 
@@ -99,7 +99,7 @@ Use TodoWrite to track stage completion:
 - Deployment plan outlined
 
 ## 🔨 Build Stage Ready
-- Codebase analyzed
+- Codebase analysed
 - Implementation structure prepared
 - First tasks ready for execution
 
@@ -136,4 +136,4 @@ If any stage fails validation:
 - Implementation is ready to begin
 - Clear next steps provided
 
-Execute the complete workflow efficiently while maintaining spec quality and providing clear progress updates throughout the process.
+Execute the complete workflow efficiently whilst maintaining spec quality and providing clear progress updates throughout the process.

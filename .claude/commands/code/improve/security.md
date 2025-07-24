@@ -65,7 +65,7 @@ res.send(userInput);                // XSS vulnerability
 eval(user_input)                    # Code execution
 exec(user_code)                     # Code execution
 cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")  # SQL injection
-pickle.loads(untrusted_data)        # Deserialization attack
+pickle.loads(untrusted_data)        # Deserialisation attack
 ```
 
 #### API Security

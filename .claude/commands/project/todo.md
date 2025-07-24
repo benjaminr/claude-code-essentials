@@ -1,22 +1,22 @@
 ---
-description: Extract and organize TODO comments from codebase
+description: Extract and organise TODO comments from codebase
 argument-hint: [directory or file path]
 allowed-tools: Grep, Read, Write, Glob
 ---
 
 # Extract TODO Comments
 
-You are extracting and organizing TODO, FIXME, HACK, and other development markers from the codebase to help track technical debt and pending tasks.
+You are extracting and organising TODO, FIXME, HACK, and other development markers from the codebase to help track technical debt and pending tasks.
 
 ## Input
 **Search Target**: $ARGUMENTS (directory path, file path, or empty for current directory)
 
 ## Your Task
 
-Extract and organize development markers:
+Extract and organise development markers:
 
 1. **Search for Markers** - Find TODO, FIXME, HACK, NOTE comments
-2. **Categorize Items** - Group by type and priority
+2. **Categorise Items** - Group by type and priority
 3. **Analyze Context** - Understand what needs to be done
 4. **Generate Report** - Create actionable task list
 
@@ -168,7 +168,7 @@ If git history is available:
 - Medium: Requires design (1-4 hours)
 - Complex: Needs planning (> 4 hours)
 
-### Categorization
+### Categorisation
 - Bug Fixes
 - Feature Implementation
 - Performance Optimization
@@ -197,9 +197,9 @@ Add to project docs:
 
 ## Success Criteria
 - All TODO-style comments found
-- Items properly categorized
+- Items properly categorised
 - Context provided for each item
 - Actionable tasks generated
 - Patterns and hotspots identified
 
-Search for and organize all development markers in the specified location.
+Search for and organise all development markers in the specified location.

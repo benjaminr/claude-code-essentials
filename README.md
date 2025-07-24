@@ -4,7 +4,7 @@ A collection of Claude Code slash commands for systematic development workflows.
 
 ## What This Gives You
 
-27 slash commands for feature development:
+29+ slash commands for feature development:
 - **Requirements → Design → Planning → Implementation** workflow
 - **EARS notation** for clear, testable requirements  
 - **Built-in validation** at each stage
@@ -13,24 +13,31 @@ A collection of Claude Code slash commands for systematic development workflows.
 ## Quick Install (Global Setup)
 
 ```bash
+# Standard installation (preserves existing commands)
 curl -sSL https://raw.githubusercontent.com/benjaminr/claude-code-essentials/main/quick-install.sh | bash
+
+# Clean installation (removes existing commands with backup)
+curl -sSL https://raw.githubusercontent.com/benjaminr/claude-code-essentials/main/quick-install.sh | bash -s -- --clean
+
+# Local installation with clean option
+bash quick-install.sh --clean
 ```
 
-This installs commands to your `~/.claude` directory, making them available across all projects.
+This installs commands to your `~/.claude` directory, making them available across all projects. Use `--clean` for a fresh installation that backs up existing commands.
 
 ## Quick Start
 
 ```bash
 # Initialize in any project
-/init-sdd
+/project:init-sdd
 
 # Create your first spec
-/spec user-auth "Secure authentication with 2FA"
+/sdd:core:spec user-auth "Secure authentication with 2FA"
 
 # Follow the workflow
-/next    # Generate design
-/next    # Create implementation plan  
-/build   # Start coding with guided tasks
+/sdd:core:next    # Generate design
+/sdd:core:next    # Create implementation plan  
+/sdd:core:build   # Start coding with guided tasks
 ```
 
 ## Core Workflow
@@ -44,36 +51,55 @@ Requirements → Design → Planning → Implementation
 ```
 
 **Manual Control:**
-- `/spec [name] [description]` - Generate EARS requirements
-- `/next` - Progress to next validated stage
-- `/build` - Execute implementation with task tracking
+- `/sdd:core:spec [name] [description]` - Generate EARS requirements
+- `/sdd:core:next` - Progress to next validated stage
+- `/sdd:core:build` - Execute implementation with task tracking
 
 **Automatic Mode:**
-- `/spec-all [name] [description]` - Generate complete specification
+- `/sdd:core:spec-all [name] [description]` - Generate complete specification
 
 ### Quality Control
 
-- `/validate` - Check current stage completeness
-- `/status` - Overview of all specifications  
-- `/refine [instructions]` - Improve current stage
-- `/reset [stage]` - Reset with backup
+- `/sdd:core:validate` - Check current stage completeness
+- `/sdd:core:status` - Overview of all specifications  
+- `/sdd:core:refine [instructions]` - Improve current stage
+- `/sdd:core:reset [stage]` - Reset with backup
 
 ## Additional Commands
 
-**Development:**
-- `/debug [error]` - Error analysis and solutions
-- `/test [target]` - Generate comprehensive test suites
-- `/optimize [code]` - Performance analysis
-- `/clean [path]` - Code cleanup and formatting
-- `/parallel [command] [feature1,feature2,...]` - Execute any command across multiple features
+**📋 SDD Core Workflow:**
+- `/sdd:core:spec`, `/sdd:core:design`, `/sdd:core:plan`, `/sdd:core:build`, `/sdd:core:validate`, `/sdd:core:next`
+- `/sdd:core:status`, `/sdd:core:refine`, `/sdd:core:reset`, `/sdd:core:spec-all`
 
-**Rapid Prototyping:**
-- `/prototype [idea] [mvp|full] [tech-stack]` - Build complete prototypes from high-level ideas
+**🔄 SDD Orchestration:**
+- `/sdd:orchestration:parallel [command] [feature1,feature2,...]` - Execute commands across multiple features
+- `/sdd:orchestration:prototype [idea] [mvp|full] [tech-stack]` - Build complete prototypes from ideas
 
-**Project Management:**
-- `/dependencies` - Analyse and manage dependencies
-- `/setup` - Configure development environment
-- `/todo [path]` - Extract and organise TODOs
+**🔍 Code Understanding:**
+- `/code:understand:explain [code]` - Explain how code works with architecture insights
+- `/code:understand:trace [flow]` - Trace execution paths through codebase
+- `/code:understand:document [path]` - Generate comprehensive documentation
+
+**🛠️ Code Improvement:**
+- `/code:improve:debug [error|image]` - Error analysis with image support and extended thinking
+- `/code:improve:refactor [code]` - Improve code structure and maintainability
+- `/code:improve:clean [path]` - Code cleanup and formatting
+- `/code:improve:optimize [code]` - Performance analysis
+- `/code:improve:security [code]` - Security analysis
+
+**📦 Project Management:**
+- `/project:init-sdd` - Initialize spec-driven development
+- `/project:setup` - Configure development environment
+- `/project:dependencies` - Analyse and manage dependencies
+- `/project:todo [path]` - Extract and organise TODOs
+- `/project:migrate [from] [to]` - Migration assistance
+
+**🧪 Testing:**
+- `/test:test [path]` - Generate and run tests against specifications
+- `/test:coverage [path]` - Analyse test coverage and generate missing tests
+
+**⚡ Development Tools:**
+- `/tools:api [description|path]` - Create new APIs or improve existing ones with industry best practices
 
 ## Key Features
 
@@ -98,22 +124,50 @@ Each specification gets its own `CLAUDE.md` with:
 - Quality gates prevent rushing
 - Automatic backups when resetting
 
-## File Structure After Installation
+## Command Organization
+
+Commands are now organized thematically for better discoverability:
 
 ```
-~/.claude/
-├── commands/              # 27 slash commands
-│   ├── spec.md           # Requirements generation
-│   ├── design.md         # Technical design  
-│   ├── plan.md           # Implementation planning
-│   ├── build.md          # Guided implementation
-│   ├── prototype.md      # Complete prototype builder
-│   ├── parallel.md       # Multi-feature execution
-│   ├── debug.md          # Error analysis
-│   ├── test.md           # Test generation
-│   └── ...               # 19 more commands
-└── templates/
-    └── command-template.md
+~/.claude/commands/
+├── sdd/                   # Spec-Driven Development
+│   ├── core/             # Core SDD workflow (11 commands)
+│   │   ├── build.md      # Guided implementation
+│   │   ├── design.md     # Technical design
+│   │   ├── next.md       # Progress to next stage
+│   │   ├── plan.md       # Implementation planning
+│   │   ├── refine.md     # Improve current stage
+│   │   ├── reset.md      # Reset SDD stages
+│   │   ├── review.md     # Review against specs
+│   │   ├── spec.md       # Generate specs
+│   │   ├── spec-all.md   # Complete workflow automation
+│   │   ├── status.md     # Progress overview
+│   │   └── validate.md   # Validate stages
+│   └── orchestration/    # SDD process management (2 commands)
+│       ├── parallel.md   # Multi-feature execution
+│       └── prototype.md  # Complete prototyping pipeline
+├── code/                 # Code operations
+│   ├── understand/       # Code analysis (2 commands)
+│   │   ├── explain.md    # Explain code with architecture insights
+│   │   └── trace.md      # Trace execution paths
+│   └── improve/          # Code enhancement (2 commands)
+│       ├── debug.md      # Debug with image support and extended thinking
+│       └── refactor.md   # Improve code structure
+├── project/              # Project management (8 commands)
+│   ├── clean.md         # Code cleanup and formatting
+│   ├── dependencies.md  # Dependency management
+│   ├── document.md      # Generate documentation
+│   ├── init-sdd.md     # Initialize spec-driven development
+│   ├── migrate.md       # Migration assistance
+│   ├── optimize.md      # Performance analysis
+│   ├── security.md      # Security analysis
+│   ├── setup.md         # Environment setup
+│   └── todo.md          # Extract and organise TODOs
+├── test/                 # Testing (2 commands)
+│   ├── coverage.md      # Test coverage analysis and generation
+│   └── test.md          # Generate and run tests
+└── tools/               # Development tools (1 command)
+    └── api.md           # API development with industry best practices
 
 # In each project:
 specs/[feature-name]/
@@ -137,55 +191,56 @@ Includes `CLAUDE.md` with:
 ### Single Feature Development
 ```bash
 # Start a new feature
-/spec payment-system "Process payments securely with Stripe"
+/sdd:core:spec payment-system "Process payments securely with Stripe"
 
 # Review generated requirements, then proceed
-/next  # Creates technical design
+/sdd:core:next  # Creates technical design
 
 # Review architecture, then proceed  
-/next  # Creates implementation tasks
+/sdd:core:next  # Creates implementation tasks
 
 # Start building with guided task tracking
-/build
+/sdd:core:build
 
 # Throughout development
-/validate  # Check quality
-/test api/payments.py  # Generate tests
-/debug "Payment webhook failing"  # Debug issues
+/sdd:core:validate  # Check quality
+/test:test api/payments.py  # Generate tests
+/code:improve:debug "Payment webhook failing"  # Debug issues
+/test:coverage api/  # Check test coverage
 ```
 
 ### Parallel Multi-Feature Development
 ```bash
 # Generate specs for multiple features simultaneously
-/parallel spec user-auth,payment-api,admin-dashboard
+/sdd:orchestration:parallel spec user-auth,payment-api,admin-dashboard
 
 # Design all features in parallel
-/parallel design user-auth,payment-api,admin-dashboard  
+/sdd:orchestration:parallel design user-auth,payment-api,admin-dashboard  
 
 # Create implementation plans for all
-/parallel plan user-auth,payment-api,admin-dashboard
+/sdd:orchestration:parallel plan user-auth,payment-api,admin-dashboard
 
 # Build all features with coordinated task tracking
-/parallel build user-auth,payment-api,admin-dashboard
+/sdd:orchestration:parallel build user-auth,payment-api,admin-dashboard
 
 # Quality assurance across all features
-/parallel validate user-auth,payment-api,admin-dashboard
-/parallel test auth-service,payment-service,admin-service
+/sdd:orchestration:parallel validate user-auth,payment-api,admin-dashboard
+/sdd:orchestration:parallel test auth-service,payment-service,admin-service
 ```
 
 ### Rapid Prototype Development
 ```bash
 # Build complete MVP from high-level idea
-/prototype "user facing coffee app" mvp "React + Node.js"
+/sdd:orchestration:prototype "user facing coffee app" mvp "React + Node.js"
 
 # Generate full e-commerce platform  
-/prototype "online marketplace for handmade goods" full
+/sdd:orchestration:prototype "online marketplace for handmade goods" full
 
 # Create social networking prototype
-/prototype "local community events app" mvp "mobile-first"
+/sdd:orchestration:prototype "local community events app" mvp "mobile-first"
 
 # Build productivity tool
-/prototype "team collaboration workspace" mvp "TypeScript + PostgreSQL"
+/sdd:orchestration:prototype "team collaboration workspace" mvp "TypeScript + PostgreSQL"
 ```
 
 ## Requirements
@@ -198,7 +253,11 @@ Includes `CLAUDE.md` with:
 
 ### Global Install (Recommended)
 ```bash
+# Standard installation
 curl -sSL https://raw.githubusercontent.com/benjaminr/claude-code-essentials/main/quick-install.sh | bash
+
+# Clean installation (removes existing commands with backup)
+curl -sSL https://raw.githubusercontent.com/benjaminr/claude-code-essentials/main/quick-install.sh | bash -s -- --clean
 ```
 
 ### Project-Specific
@@ -224,4 +283,10 @@ cp -r claude-code-essentials/.claude/ /path/to/your/project/
 
 ---
 
-Run the installer above, then use `/init-sdd` in any project.
+Run the installer above, then use `/project:init-sdd` in any project.
+
+## Installation Options
+
+- **Standard**: `bash quick-install.sh` - Preserves existing commands
+- **Clean**: `bash quick-install.sh --clean` - Fresh install with backup of existing commands
+- **Help**: `bash quick-install.sh --help` - Show all installation options

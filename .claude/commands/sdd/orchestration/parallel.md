@@ -172,8 +172,8 @@ Complete this task autonomously and report your results."
 # Debug multiple features
 /parallel debug auth,payments,notifications
 
-# Optimize multiple features  
-/parallel optimize user-service,payment-service,notification-service
+# Optimise multiple features  
+/parallel optimise user-service,payment-service,notification-service
 
 # Clean multiple codebases
 /parallel clean frontend/,backend/,mobile/

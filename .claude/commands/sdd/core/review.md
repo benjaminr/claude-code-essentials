@@ -1,7 +1,7 @@
 ---
-description: Perform systematic code review with best practices checklist
-argument-hint: [files to review or PR/branch]
-allowed-tools: Read, Grep, Glob, Bash, Task
+description: Perform systematic code review with PR description generation and risk analysis
+argument-hint: [files/branch to review] or "pr" for PR description
+allowed-tools: Read, Grep, Glob, Bash, Task, WebSearch
 ---
 
 # Code Review Assistant
@@ -9,17 +9,35 @@ allowed-tools: Read, Grep, Glob, Bash, Task
 You are performing systematic code review to ensure code quality, maintainability, security, and adherence to best practices.
 
 ## Input
-**Review Target**: $ARGUMENTS (file paths, branch name, or PR reference)
+**Review Request**: $ARGUMENTS
+- **Code Review**: File paths, branch name, or directory
+- **PR Generation**: Use "pr" to generate pull request description
+- **Risk Analysis**: Add "risk" flag for enhanced risk assessment
 
 ## Your Task
 
-Conduct comprehensive code review covering:
+Based on the request type:
 
+### For Code Review:
 1. **Code Quality** - Structure, readability, maintainability
 2. **Functionality** - Logic correctness and edge cases
 3. **Security** - Vulnerability assessment
 4. **Performance** - Efficiency and scalability concerns
 5. **Standards Compliance** - Team conventions and best practices
+
+### For PR Description Generation:
+1. **Change Summary** - What was changed and why
+2. **Technical Details** - Implementation approach
+3. **Testing Strategy** - How changes were tested
+4. **Risk Assessment** - Potential impacts and mitigation
+5. **Deployment Notes** - Special considerations
+
+### For Risk Analysis:
+1. **Breaking Changes** - API/contract modifications
+2. **Performance Impact** - Load and scalability effects
+3. **Security Implications** - New attack surfaces
+4. **Dependency Changes** - Version updates or new dependencies
+5. **Data Migration** - Schema or data format changes
 
 ## Review Framework
 
@@ -210,6 +228,111 @@ Conduct comprehensive code review covering:
 [Details of any compatibility issues]
 ```
 
+## PR Description Generation
+
+When "pr" is specified, generate comprehensive pull request description:
+
+```markdown
+# 🚀 [Feature/Fix/Refactor]: [Descriptive Title]
+
+## 🎯 Summary
+[2-3 sentence overview of what this PR accomplishes]
+
+## 🔍 What Changed
+- **[Component/Module]**: [Specific changes made]
+- **[Another Component]**: [What was modified]
+- **[Configuration]**: [Any config updates]
+
+## 💡 Why These Changes
+[Business context and technical rationale]
+
+## 🔧 Technical Approach
+### Implementation Details
+- [Key technical decision 1]
+- [Algorithm or pattern used]
+- [Integration approach]
+
+### Code Structure
+```
+[Visual representation of changes if helpful]
+```
+
+## 🧪 Testing
+### Test Coverage
+- ✅ Unit tests: [What's covered]
+- ✅ Integration tests: [What's tested]
+- ✅ Manual testing: [Scenarios tested]
+
+### Test Results
+```bash
+# All tests passing
+[Test summary output]
+```
+
+## ⚠️ Risk Assessment
+### Potential Impacts
+- **Performance**: [Impact assessment]
+- **Breaking Changes**: [None/List any]
+- **Database**: [Migration needed?]
+- **Dependencies**: [New/updated packages]
+
+### Mitigation
+- [How risks are addressed]
+- [Rollback strategy if needed]
+
+## 📋 Checklist
+- [ ] Tests pass locally
+- [ ] Documentation updated
+- [ ] No console.logs or debug code
+- [ ] Follows team coding standards
+- [ ] Security considerations addressed
+- [ ] Performance impact assessed
+
+## 📦 Deployment Notes
+- **Pre-deployment**: [Any required steps]
+- **Feature flags**: [If applicable]
+- **Monitoring**: [What to watch post-deploy]
+
+## 📸 Screenshots/Demo
+[If UI changes, include before/after screenshots]
+
+## 🔗 Related
+- Issue: #[issue-number]
+- Depends on: #[other-pr]
+- Blocks: #[dependent-work]
+```
+
+## Enhanced Risk Analysis
+
+When "risk" flag is included:
+
+```markdown
+# ⚠️ Risk Analysis Report
+
+## Risk Matrix
+| Area | Risk Level | Impact | Likelihood | Mitigation |
+|------|------------|--------|------------|------------|
+| Performance | 🟡 Medium | High load scenarios | Moderate | Caching implemented |
+| Security | 🟢 Low | None identified | Low | Input validation added |
+| Data Integrity | 🔴 High | Migration required | High | Rollback script ready |
+
+## Detailed Risk Assessment
+
+### 🔴 High Risk: Database Migration
+**Impact**: All user data requires transformation
+**Mitigation**: 
+- Backup strategy in place
+- Incremental migration approach
+- Rollback script tested
+
+### 🟡 Medium Risk: API Changes
+**Impact**: External integrations may break
+**Mitigation**:
+- Version endpoint maintained
+- Deprecation warnings added
+- Partner notification sent
+```
+
 ## Review Workflow Integration
 
 ### PR Review Template
@@ -220,6 +343,8 @@ Conduct comprehensive code review covering:
 - [ ] No security vulnerabilities introduced
 - [ ] Performance impact assessed
 - [ ] Documentation updated
+- [ ] PR description comprehensive
+- [ ] Risk assessment completed
 
 ## Questions for Author:
 1. [Specific question about implementation choice]

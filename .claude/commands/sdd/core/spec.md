@@ -39,9 +39,9 @@ You are creating the first stage of a spec-driven development workflow. Your tas
 [Requirements in EARS notation format:]
 
 ### [Requirement Category]
-**REQ-001**: WHEN [specific condition/trigger occurs] THE SYSTEM SHALL [specific behavior/response]
+**REQ-001**: WHEN [specific condition/trigger occurs] THE SYSTEM SHALL [specific behaviour/response]
 
-**REQ-002**: WHEN [another condition] THE SYSTEM SHALL [another behavior]
+**REQ-002**: WHEN [another condition] THE SYSTEM SHALL [another behaviour]
 
 [Continue with additional requirements...]
 

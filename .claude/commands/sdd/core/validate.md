@@ -123,7 +123,7 @@ Run `/next` to proceed to [next stage name]
 ## Success Criteria
 - Validation report identifies the current stage correctly
 - All validation criteria for the stage are checked
-- Issues are clearly categorized by severity
+- Issues are clearly categorised by severity
 - Specific recommendations are provided
 - Clear guidance on readiness for next stage
 
