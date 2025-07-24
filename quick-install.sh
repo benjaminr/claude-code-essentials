@@ -147,6 +147,7 @@ setup_directories() {
     mkdir -p ~/.claude/commands/test
     mkdir -p ~/.claude/commands/tools
     mkdir -p ~/.claude/templates
+    mkdir -p ~/.claude/agents
     
     print_success "Directory structure created"
 }
@@ -199,6 +200,43 @@ install_commands() {
     rm -rf "$temp_dir"
 }
 
+# Download and install sub-agents
+install_agents() {
+    print_status "Downloading and installing specialized sub-agents..."
+    
+    local base_url="https://raw.githubusercontent.com/benjaminr/claude-code-essentials/main/.claude/agents"
+    local temp_dir=$(mktemp -d)
+    
+    # List of all agent files
+    local agents=(
+        "code-standards-enforcer.md"
+        "documentation-generator.md"
+        "performance-profiler.md"
+        "test-engineer.md"
+        "infra-engineer.md"
+        "fullstack-engineer.md"
+        "ai-engineer.md"
+        "git-workflow-assistant.md"
+        "design-frontend-assistant.md"
+    )
+    
+    local downloaded=0
+    
+    for agent in "${agents[@]}"; do
+        if download_file "$base_url/$agent" "$temp_dir/$agent" 2>/dev/null; then
+            cp "$temp_dir/$agent" ~/.claude/agents/
+            ((downloaded++))
+        else
+            print_warning "Failed to download $agent"
+        fi
+    done
+    
+    print_success "Installed $downloaded specialized sub-agents"
+    
+    # Cleanup
+    rm -rf "$temp_dir"
+}
+
 # Download and install templates
 install_templates() {
     print_status "Installing templates..."
@@ -237,6 +275,7 @@ set_permissions() {
     
     find ~/.claude/commands -name "*.md" -exec chmod 644 {} \; 2>/dev/null || true
     find ~/.claude/templates -name "*.md" -exec chmod 644 {} \; 2>/dev/null || true
+    find ~/.claude/agents -name "*.md" -exec chmod 644 {} \; 2>/dev/null || true
     chmod 644 ~/.claude/CLAUDE.md 2>/dev/null || true
     
     print_success "Permissions set"
@@ -254,9 +293,18 @@ verify_installation() {
         exit 1
     fi
     
-    # Count installed commands
+    # Check if agents were installed
+    if [ -f ~/.claude/agents/code-standards-enforcer.md ]; then
+        print_success "Sub-agents installed successfully"
+    else
+        print_warning "Sub-agents installation may have failed"
+    fi
+    
+    # Count installed commands and agents
     local command_count=$(find ~/.claude/commands -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+    local agent_count=$(find ~/.claude/agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
     print_success "Total commands available: $command_count"
+    print_success "Total sub-agents available: $agent_count"
 }
 
 # Show next steps
@@ -282,6 +330,18 @@ show_next_steps() {
     echo "  🧪 Testing: /test, /coverage"
     echo "  ⚡ Tools: /api"
     echo ""
+    echo "🤖 9 Specialized Sub-Agents Available:"
+    echo "  • Code Standards Enforcer - Pedantic quality control"
+    echo "  • Documentation Generator - Dual-layer documentation"
+    echo "  • Performance Profiler - Proactive optimization"
+    echo "  • Test Engineer - Strategic test coverage"
+    echo "  • Infrastructure Engineer - AWS + Terraform"
+    echo "  • Full-Stack Engineer - Next.js + FastAPI"
+    echo "  • AI Engineer - Full-spectrum ML/AI"
+    echo "  • Git Workflow Assistant - GitHub Flow"
+    echo "  • Design & Frontend Assistant - Mobile-first design"
+    echo ""
+    echo "Access sub-agents with: /agents (to manage) or mention them in requests"
     echo "Documentation: Each command includes built-in help and examples"
     echo "Global config: ~/.claude/CLAUDE.md"
     echo ""
@@ -310,6 +370,15 @@ install_local() {
     else
         print_error "Commands directory not found. Are you in the correct directory?"
         exit 1
+    fi
+    
+    # Copy all agents
+    if [ -d ".claude/agents" ]; then
+        cp -r .claude/agents/* ~/.claude/agents/
+        local agent_count=$(find .claude/agents -name "*.md" | wc -l | tr -d ' ')
+        print_success "Installed $agent_count specialized sub-agents"
+    else
+        print_warning "No agents directory found, skipping..."
     fi
     
     # Copy templates
@@ -355,6 +424,7 @@ main() {
     else
         print_status "Remote installation"
         install_commands
+        install_agents
         install_templates
         install_global_config
     fi

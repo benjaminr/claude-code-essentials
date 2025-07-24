@@ -4,11 +4,22 @@ A collection of Claude Code slash commands for systematic development workflows.
 
 ## What This Gives You
 
-29+ slash commands for feature development:
+**29+ slash commands** for systematic development:
 - **Requirements → Design → Planning → Implementation** workflow
 - **EARS notation** for clear, testable requirements  
 - **Built-in validation** at each stage
 - **Memory integration** for project context
+
+**9 specialized sub-agents** for comprehensive development:
+- **Code Standards Enforcer** - Pedantic code quality with British English consistency
+- **Documentation Generator** - Dual-layer docs with quick-start guides and detailed references
+- **Performance Profiler** - Proactive optimization with quantified improvements
+- **Test Engineer** - High-coverage testing with realistic data and minimal mocking
+- **Infrastructure Engineer** - AWS + Terraform with Grafana monitoring
+- **Full-Stack Engineer** - Next.js + FastAPI with type-safe APIs
+- **AI Engineer** - Full-spectrum ML/AI with LLM expertise and microservices
+- **Git Workflow Assistant** - GitHub Flow with strict commit standards
+- **Design & Frontend Assistant** - Mobile-first Tailwind with reusable design systems
 
 ## Quick Install (Global Setup)
 
@@ -124,57 +135,35 @@ Each specification gets its own `CLAUDE.md` with:
 - Quality gates prevent rushing
 - Automatic backups when resetting
 
-## Command Organization
+## Project Structure
 
-Commands are now organized thematically for better discoverability:
+After installation, you'll have:
 
 ```
-~/.claude/commands/
-├── sdd/                   # Spec-Driven Development
-│   ├── core/             # Core SDD workflow (11 commands)
-│   │   ├── build.md      # Guided implementation
-│   │   ├── design.md     # Technical design
-│   │   ├── next.md       # Progress to next stage
-│   │   ├── plan.md       # Implementation planning
-│   │   ├── refine.md     # Improve current stage
-│   │   ├── reset.md      # Reset SDD stages
-│   │   ├── review.md     # Review against specs
-│   │   ├── spec.md       # Generate specs
-│   │   ├── spec-all.md   # Complete workflow automation
-│   │   ├── status.md     # Progress overview
-│   │   └── validate.md   # Validate stages
-│   └── orchestration/    # SDD process management (2 commands)
-│       ├── parallel.md   # Multi-feature execution
-│       └── prototype.md  # Complete prototyping pipeline
-├── code/                 # Code operations
-│   ├── understand/       # Code analysis (2 commands)
-│   │   ├── explain.md    # Explain code with architecture insights
-│   │   └── trace.md      # Trace execution paths
-│   └── improve/          # Code enhancement (2 commands)
-│       ├── debug.md      # Debug with image support and extended thinking
-│       └── refactor.md   # Improve code structure
-├── project/              # Project management (8 commands)
-│   ├── clean.md         # Code cleanup and formatting
-│   ├── dependencies.md  # Dependency management
-│   ├── document.md      # Generate documentation
-│   ├── init-sdd.md     # Initialize spec-driven development
-│   ├── migrate.md       # Migration assistance
-│   ├── optimize.md      # Performance analysis
-│   ├── security.md      # Security analysis
-│   ├── setup.md         # Environment setup
-│   └── todo.md          # Extract and organise TODOs
-├── test/                 # Testing (2 commands)
-│   ├── coverage.md      # Test coverage analysis and generation
-│   └── test.md          # Generate and run tests
-└── tools/               # Development tools (1 command)
-    └── api.md           # API development with industry best practices
+~/.claude/
+├── commands/              # 29+ slash commands organized thematically
+│   ├── sdd/              # Spec-Driven Development workflow
+│   ├── code/             # Code analysis and improvement
+│   ├── project/          # Project management utilities
+│   ├── test/             # Testing and coverage tools
+│   └── tools/            # Development utilities
+└── agents/               # 9 specialized sub-agents
+    ├── code-standards-enforcer.md      # Pedantic quality control
+    ├── documentation-generator.md       # Dual-layer documentation
+    ├── performance-profiler.md         # Proactive optimization
+    ├── test-engineer.md                # Strategic test coverage
+    ├── infra-engineer.md               # AWS + Terraform infrastructure
+    ├── fullstack-engineer.md           # Next.js + FastAPI development
+    ├── ai-engineer.md                  # Full-spectrum ML/AI solutions
+    ├── git-workflow-assistant.md       # GitHub Flow with strict standards
+    └── design-frontend-assistant.md    # Mobile-first design systems
 
-# In each project:
+# In each project after /project:init-sdd:
 specs/[feature-name]/
-├── CLAUDE.md            # Feature context
-├── requirements.md      # EARS requirements
-├── design.md           # Technical architecture  
-└── tasks.md            # Implementation plan
+├── CLAUDE.md            # Feature context and decisions
+├── requirements.md      # EARS requirements specification
+├── design.md           # Technical architecture and design
+└── tasks.md            # Implementation plan and progress
 ```
 
 ## Development Standards
@@ -269,17 +258,29 @@ cp -r claude-code-essentials/.claude/ /path/to/your/project/
 
 ## Benefits
 
-- **Structured approach** to feature development
-- **Quality validation** at each stage
-- **Standardised requirements** format (EARS notation)
-- **Consistent development** workflow
-- **Built-in coding** standards
+**Systematic Development:**
+- **Structured approach** with Requirements → Design → Planning → Implementation
+- **Quality validation** at each stage with built-in quality gates
+- **EARS notation** for clear, testable requirements
+- **Memory integration** for project context and decisions
+
+**Specialized Expertise:**
+- **9 custom sub-agents** covering all aspects of development
+- **Automatic delegation** based on task requirements
+- **Consistent standards** enforced across all work
+- **British English** consistency in all documentation and code
+
+**Scalable Workflows:**
 - **Parallel execution** for multiple features simultaneously
-- **Subagent coordination** for scalable development
-- **Progress tracking** across complex multi-feature projects
 - **Rapid prototyping** from high-level ideas to working code
-- **Intelligent feature breakdown** with MVP prioritisation
-- **End-to-end pipeline orchestration** for complete applications
+- **End-to-end orchestration** for complete applications
+- **Progress tracking** across complex multi-feature projects
+
+**Quality Assurance:**
+- **Pedantic code standards** with detailed explanations
+- **Performance optimization** with quantified improvements
+- **Comprehensive testing** with realistic data and minimal mocking
+- **Security-conscious** infrastructure and development practices
 
 ---
 
