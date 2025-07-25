@@ -6,7 +6,7 @@ allowed-tools: Read, Write, MultiEdit, Grep, Glob, Bash
 
 # Clean Code
 
-You are cleaning up code by removing unused imports, dead code, formatting issues, and other code hygiene problems.
+You are cleaning up code by removing unused imports, dead code, formatting issues, and other code hygiene problems. You automatically detect the language and apply language-specific best practices, with a focus on Python.
 
 ## Input
 **Target to Clean**: $ARGUMENTS (file path, directory, or empty for current directory)
@@ -15,21 +15,74 @@ You are cleaning up code by removing unused imports, dead code, formatting issue
 
 Clean and improve code quality:
 
-1. **Remove Unused Code** - Imports, variables, functions
-2. **Fix Formatting** - Consistent style and structure
-3. **Improve Readability** - Simplify complex expressions
-4. **Update Patterns** - Modernise outdated patterns
+1. **Auto-detect Language** - Identify file types and apply language-specific rules
+2. **Remove Unused Code** - Imports, variables, functions, old commented code
+3. **Fix Formatting** - Run formatters (ruff/black for Python, prettier for JS/TS)
+4. **Apply Auto-fixes** - Use linter fixes respecting existing configs
+5. **Improve Readability** - Simplify complex expressions following language best practices
+6. **Update Patterns** - Modernise outdated patterns for each language
+7. **Create Undo Backup** - Save original state before making changes
 
 ## Cleaning Strategy
 
-### 1. Code Analysis
-- Identify unused imports
-- Find unreachable code
-- Detect unused variables/functions
-- Check for duplicate code
-- Find console.logs/debug statements
+### 1. Language Detection & Setup
+- Detect programming language from file extension and content
+- Check for formatter configs (.ruff.toml, pyproject.toml, .prettierrc)
+- Create backup of original files for undo capability
+- Scan both tracked files and .gitignore contents (focusing on code)
 
-### 2. Cleaning Report
+### 2. Language-Specific Analysis
+
+#### Python
+- Identify unused imports with `ruff check --select F401`
+- Find unreachable code and dead functions
+- Detect unused variables (`ruff check --select F841`)
+- Remove `__pycache__` directories and `.pyc` files
+- Find print statements and debug code
+- Check for outdated patterns (e.g., `%` formatting, old-style classes)
+
+#### JavaScript/TypeScript
+- Identify unused imports and exports
+- Find console.log/debug statements
+- Detect unreachable code after return
+- Check for var usage (prefer const/let)
+- Find commented-out code blocks
+
+### 3. Automated Cleaning Process
+
+```python
+# Step 1: Create undo backup
+import shutil
+import tempfile
+backup_dir = tempfile.mkdtemp(prefix="clean_backup_")
+print(f"Backup created at: {backup_dir}")
+
+# Step 2: Run language-specific formatters
+# Python
+if language == "python":
+    # Run ruff format (respects pyproject.toml)
+    subprocess.run(["ruff", "format", target_path])
+    # Run ruff fix for auto-fixable issues
+    subprocess.run(["ruff", "check", "--fix", target_path])
+    # Clean Python cache
+    for root, dirs, files in os.walk(target_path):
+        if "__pycache__" in dirs:
+            shutil.rmtree(os.path.join(root, "__pycache__"))
+        for file in files:
+            if file.endswith(".pyc"):
+                os.remove(os.path.join(root, file))
+
+# JavaScript/TypeScript
+elif language in ["javascript", "typescript"]:
+    # Run prettier if config exists
+    if prettier_config_exists:
+        subprocess.run(["prettier", "--write", target_path])
+    # Run ESLint fix
+    if eslint_config_exists:
+        subprocess.run(["eslint", "--fix", target_path])
+```
+
+### 4. Cleaning Report
 
 ```markdown
 # 🧹 Code Cleanup Report
@@ -63,15 +116,29 @@ Clean and improve code quality:
 - console.error('temporary debug');
 ```
 
-### Code Simplified
+### Code Simplified (Python Examples)
 ✨ **[file:line]**
 ```diff
-- if (condition === true) {
--   return true;
-- } else {
--   return false;
-- }
-+ return condition;
+# Boolean simplification
+- if condition == True:
+-     return True
+- else:
+-     return False
++ return bool(condition)
+
+# List comprehension
+- result = []
+- for item in items:
+-     if item.is_valid:
+-         result.append(item.value)
++ result = [item.value for item in items if item.is_valid]
+
+# Context manager usage
+- file = open('data.txt')
+- content = file.read()
+- file.close()
++ with open('data.txt') as file:
++     content = file.read()
 ```
 
 ### Formatting Fixed
@@ -82,12 +149,33 @@ Clean and improve code quality:
 
 ## Patterns Modernized
 
-### Updated to Modern Syntax
+### Updated to Modern Python Syntax
 ```diff
-- var x = 1;
-- var y = function() {};
-+ const x = 1;
-+ const y = () => {};
+# String formatting
+- message = "Hello %s, you are %d years old" % (name, age)
+- message = "Hello {}, you are {} years old".format(name, age)
++ message = f"Hello {name}, you are {age} years old"
+
+# Type hints (Python 3.9+)
+- from typing import List, Dict, Optional
+- def process(items: List[str]) -> Dict[str, int]:
++ def process(items: list[str]) -> dict[str, int]:
+
+# Dictionary merging
+- merged = dict1.copy()
+- merged.update(dict2)
++ merged = dict1 | dict2  # Python 3.9+
+
+# Pattern matching (Python 3.10+)
+- if isinstance(value, int):
+-     return value * 2
+- elif isinstance(value, str):
+-     return len(value)
++ match value:
++     case int(n):
++         return n * 2
++     case str(s):
++         return len(s)
 ```
 
 ### Async/Await Migration
@@ -140,11 +228,25 @@ Clean and improve code quality:
 
 ## Cleaning Categories
 
-### Import Hygiene
-- Remove unused imports
-- Organise import order
-- Combine duplicate imports
-- Convert require to import
+### Python Import Hygiene
+- Remove unused imports (using ruff)
+- Sort imports with isort conventions
+- Group imports (standard lib, third-party, local)
+- Remove duplicate imports
+- Convert old-style imports to modern
+```python
+# Before
+import os, sys
+from typing import List, Dict, Optional
+import unused_module
+from my_module import *
+
+# After
+import os
+import sys
+
+from my_module import specific_function, SpecificClass
+```
 
 ### Dead Code Elimination
 - Unreachable code after return
@@ -152,11 +254,15 @@ Clean and improve code quality:
 - Commented-out code blocks
 - Obsolete feature flags
 
-### Code Modernization
-- var → const/let
-- Callbacks → async/await
-- Class components → hooks
-- Old syntax → modern syntax
+### Python Code Modernization
+- Old string formatting → f-strings
+- `typing` imports → built-in types (3.9+)
+- Dictionaries → dataclasses where appropriate
+- Manual file handling → context managers
+- `os.path` → `pathlib.Path`
+- Class decorators for simple classes
+- Walrus operator for assignments (3.8+)
+- Match statements for complex conditionals (3.10+)
 
 ### Formatting & Style
 - Consistent indentation
@@ -186,33 +292,60 @@ Clean and improve code quality:
 
 ## Configuration Support
 
-### ESLint Integration
-```json
-{
-  "rules": {
-    "no-unused-vars": "error",
-    "no-console": "warn",
-    "no-debugger": "error",
-    "no-unreachable": "error"
-  }
-}
+### Python Tool Integration
+
+#### Ruff Configuration (pyproject.toml)
+```toml
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+# Enable specific rule sets
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "RUF",  # Ruff-specific rules
+]
+
+# Auto-fix these issues
+fixable = ["ALL"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]  # Allow unused imports in __init__ files
 ```
 
-### Prettier Config
-```json
-{
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5"
-}
+#### Black Configuration (pyproject.toml)
+```toml
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+```
+
+## Undo Mechanism
+
+```python
+# Restore from backup
+def undo_cleaning(backup_dir: str, target_path: str):
+    """Restore files from backup created during cleaning."""
+    if os.path.exists(backup_dir):
+        shutil.rmtree(target_path)
+        shutil.copytree(backup_dir, target_path)
+        print(f"✅ Restored from backup: {backup_dir}")
+    else:
+        print(f"❌ Backup not found: {backup_dir}")
 ```
 
 ## Success Criteria
-- Code is cleaner and more maintainable
+- Code is cleaner and follows language best practices
+- All formatters and linters run successfully
 - No functionality is broken
 - Tests still pass
-- Build size is reduced
-- Code follows consistent style
+- Backup created for easy undo
+- Python code follows modern idioms
+- Respects existing tool configurations
 
-Clean the specified code while maintaining functionality and improving quality.
+Clean the specified code while maintaining functionality and improving quality according to language-specific best practices.
