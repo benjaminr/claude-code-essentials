@@ -186,8 +186,8 @@ install_commands() {
         
         if download_file "$base_url/$cmd" "$temp_dir/$cmd" 2>/dev/null; then
             # Create target directory and copy file
-            mkdir -p "~/.claude/commands/$cmd_dir"
-            cp "$temp_dir/$cmd" "~/.claude/commands/$cmd"
+            mkdir -p ~/.claude/commands/$cmd_dir
+            cp "$temp_dir/$cmd" ~/.claude/commands/$cmd
             ((downloaded++))
         else
             print_warning "Failed to download $cmd"
